@@ -488,15 +488,39 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Controls
 
+    -----------------
+
+    WASD
 
     Forward - W
 
-    Left  -  A
+    Left 
+    -  A
 
     Right -D
 
+    Backwards - S
+
+    ------------------
+
+    Or
+
+    ------------------
+
+    ARROWKEYS
+
+    Forward
+    - Forward arrow
+
+    Left - Left arrow
+
+    Right -  Right arrow
+
     Backwards
-    - S'
+    - Arrow down
+
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2107,6 +2131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1546998763994094958, guid: d815136e590bfdb42a43113400a92032, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4000736031688211515, guid: d815136e590bfdb42a43113400a92032, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.86

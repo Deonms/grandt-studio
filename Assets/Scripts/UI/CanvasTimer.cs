@@ -5,7 +5,7 @@ public class CanvasTimer : MonoBehaviour
 {
     void Start()
     {
-        Invoke(nameof(DisableCanvas), 10f);
+        Invoke(nameof(DisableCanvas), 20f);
     }
 
     void Update()
