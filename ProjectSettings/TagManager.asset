@@ -6,9 +6,9 @@ TagManager:
   tags:
   - Fragile
   - heavy
-  - normal
   - light
   - liquid
+  - normal
   layers:
   - Default
   - TransparentFX
