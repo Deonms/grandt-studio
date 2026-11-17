@@ -752,7 +752,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 780955109}
-  _timeRemaining: 10
+  _timeRemaining: 60
+  _decimals: 0
 --- !u!114 &780955109
 MonoBehaviour:
   m_ObjectHideFlags: 0
