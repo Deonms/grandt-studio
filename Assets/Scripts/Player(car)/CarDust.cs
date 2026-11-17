@@ -74,8 +74,8 @@ public class CarDustEffect : MonoBehaviour
     void Update()
     {
         if (rb == null) return;
-
-        bool isMoving = rb.linearVelocity.magnitude > minSpeed;
+        float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
+        bool isMovingForward = forwardSpeed > minSpeed;
 
         foreach (ParticleSystem ps in dustSystems)
         {
@@ -84,8 +84,8 @@ public class CarDustEffect : MonoBehaviour
             var emission = ps.emission;
             emission.rateOverTime = spawnRate;
 
-            if (isMoving && !ps.isPlaying) ps.Play();
-            else if (!isMoving && ps.isPlaying) ps.Stop();
+            if (isMovingForward && !ps.isPlaying) ps.Play();
+            else if (!isMovingForward && ps.isPlaying) ps.Stop();
         }
     }
 }
