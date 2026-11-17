@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2133018914836837300
+--- !u!1001 &8611790316163295358
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.07
+      value: 28.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.55
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 123.42
+      value: 124.3489
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,9 +48,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0fc7748ff7613e842b3ad0498324d3b6, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4467f8b16ad8d4b47b760056310778ea, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4dbb1f1db41eb1e4396f0a74c65c1f85, type: 2}
     - target: {fileID: 919132149155446097, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
       propertyPath: m_Name
-      value: HouseV2
+      value: HouseV2 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58,20 +70,20 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7787094195312794364}
+      addedObject: {fileID: 8295600378715086657}
   m_SourcePrefab: {fileID: 100100000, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
---- !u!1 &1250708457687142117 stripped
+--- !u!1 &8881749907409655087 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b3f10506c09adb8499fdc395adc1b9d8, type: 3}
-  m_PrefabInstance: {fileID: 2133018914836837300}
+  m_PrefabInstance: {fileID: 8611790316163295358}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7787094195312794364
+--- !u!65 &8295600378715086657
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1250708457687142117}
+  m_GameObject: {fileID: 8881749907409655087}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
