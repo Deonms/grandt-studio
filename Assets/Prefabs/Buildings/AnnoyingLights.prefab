@@ -133,7 +133,7 @@ MonoBehaviour:
     objectRenderer: {fileID: 4731171948232991014}
     materialOff: {fileID: 2100000, guid: 956ee75cff3933a45b7a19cdc554a742, type: 2}
     materialOn: {fileID: 2100000, guid: 397ac28f44a7c274baa670dbbc092568, type: 2}
-    duration: 3
+    duration: 2
   - phaseName: Red
     objectRenderer: {fileID: 269298107946197481}
     materialOff: {fileID: 2100000, guid: 956ee75cff3933a45b7a19cdc554a742, type: 2}
