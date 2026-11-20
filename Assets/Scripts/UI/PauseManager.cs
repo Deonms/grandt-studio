@@ -1,12 +1,30 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameScreenManager : MonoBehaviour
+public class PauzeManager : MonoBehaviour
 {
     [Header("UI Panels")]
     public GameObject menuUI;
+    public GameObject missionUI;
+    public GameObject introCanvas;
 
     private bool isGameStopped = false;
+    private bool introFinished = false;
+
+    void Start()
+    {
+        // Zorg dat de missie-UI uit staat zolang de intro loopt
+        if (introCanvas != null && introCanvas.activeInHierarchy)
+        {
+            introFinished = false;
+            SetMissionUIVisible(false);
+        }
+        else
+        {
+            introFinished = true;
+            RefreshMissionUI();
+        }
+    }
 
     void Update()
     {
@@ -22,6 +40,13 @@ public class GameScreenManager : MonoBehaviour
             }
         }
     }
+
+    public void OnIntroFinished()
+    {
+        introFinished = true;
+        RefreshMissionUI();
+    }
+
     public void PauseGame()
     {
         isGameStopped = true;
@@ -31,7 +56,10 @@ public class GameScreenManager : MonoBehaviour
         {
             menuUI.SetActive(true);
         }
+
+        RefreshMissionUI();
     }
+
     public void ResumeGame()
     {
         isGameStopped = false;
@@ -40,6 +68,22 @@ public class GameScreenManager : MonoBehaviour
         if (menuUI != null)
         {
             menuUI.SetActive(false);
+        }
+
+        RefreshMissionUI();
+    }
+
+    private void RefreshMissionUI()
+    {
+        bool shouldShow = introFinished && !isGameStopped;
+        SetMissionUIVisible(shouldShow);
+    }
+
+    private void SetMissionUIVisible(bool visible)
+    {
+        if (missionUI != null)
+        {
+            missionUI.SetActive(visible);
         }
     }
 }
