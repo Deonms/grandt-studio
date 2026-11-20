@@ -14,6 +14,8 @@ public class Stoplight : MonoBehaviour
     }
 
     public StoplightPhase[] lights = new StoplightPhase[3];
+    public int CurrentPhaseIndex { get; private set; } = -1;
+    public bool IsThirdLightActive => CurrentPhaseIndex == 2;
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class Stoplight : MonoBehaviour
         {
             for (int i = 0; i < lights.Length; i++)
             {
+                CurrentPhaseIndex = i;
                 UpdateLights(i);
                 yield return new WaitForSeconds(lights[i].duration);
             }

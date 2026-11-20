@@ -128,12 +128,12 @@ MonoBehaviour:
     objectRenderer: {fileID: 7940296045700621034}
     materialOff: {fileID: 2100000, guid: 956ee75cff3933a45b7a19cdc554a742, type: 2}
     materialOn: {fileID: 2100000, guid: ef822d0c9009e6e47a0745cd0b428895, type: 2}
-    duration: 3
+    duration: 8
   - phaseName: Yellow
     objectRenderer: {fileID: 4731171948232991014}
     materialOff: {fileID: 2100000, guid: 956ee75cff3933a45b7a19cdc554a742, type: 2}
     materialOn: {fileID: 2100000, guid: 397ac28f44a7c274baa670dbbc092568, type: 2}
-    duration: 2
+    duration: 6
   - phaseName: Red
     objectRenderer: {fileID: 269298107946197481}
     materialOff: {fileID: 2100000, guid: 956ee75cff3933a45b7a19cdc554a742, type: 2}
