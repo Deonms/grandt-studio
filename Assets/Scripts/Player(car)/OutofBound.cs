@@ -7,18 +7,18 @@ public class OutOfBound : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            HerstartLevel();
+            restartLevel();
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            HerstartLevel();
+            restartLevel();
         }
     }
 
-    private void HerstartLevel()
+    private void restartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
