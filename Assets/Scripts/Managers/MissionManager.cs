@@ -14,8 +14,8 @@ public class MissionManager : MonoBehaviour
     public string scorePrefix = "Score: ";
 
     public int currentScore = 0;
-    private GameObject activePoint;
-    private bool isWaitingForNextPoint = false;
+    private GameObject _activePoint;
+    private bool _isWaitingForNextPoint = false;
 
     void Start()
     {
@@ -31,33 +31,33 @@ public class MissionManager : MonoBehaviour
     }
     public void CompleteMissionPoint()
     {
-        if (isWaitingForNextPoint) return;
+        if (_isWaitingForNextPoint) return;
         currentScore++;
         UpdateScoreUI();
 
-        if (activePoint != null)
+        if (_activePoint != null)
         {
-            activePoint.SetActive(false);
+            _activePoint.SetActive(false);
         }
         StartCoroutine(ActivateNextPointAfterDelay());
     }
     private IEnumerator ActivateNextPointAfterDelay()
     {
-        isWaitingForNextPoint = true;
+        _isWaitingForNextPoint = true;
         yield return new WaitForSeconds(delayBeforeNextPoint);
-        isWaitingForNextPoint = false;
+        _isWaitingForNextPoint = false;
         ActivateNextPoint();
     }
     private void ActivateNextPoint()
     {
         if (missionPoints == null || missionPoints.Count == 0) return;
 
-        GameObject nextPoint = activePoint;
+        GameObject nextPoint = _activePoint;
 
         if (missionPoints.Count > 1)
         {
             int safetyCounter = 0;
-            while (nextPoint == activePoint && safetyCounter < 50)
+            while (nextPoint == _activePoint && safetyCounter < 50)
             {
                 int randomIndex = Random.Range(0, missionPoints.Count);
                 nextPoint = missionPoints[randomIndex];
@@ -68,10 +68,10 @@ public class MissionManager : MonoBehaviour
         {
             nextPoint = missionPoints[0];
         }
-        activePoint = nextPoint;
-        if (activePoint != null)
+        _activePoint = nextPoint;
+        if (_activePoint != null)
         {
-            activePoint.SetActive(true);
+            _activePoint.SetActive(true);
         }
     }
     private void UpdateScoreUI()
