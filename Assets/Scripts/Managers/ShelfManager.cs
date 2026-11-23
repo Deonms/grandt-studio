@@ -5,38 +5,39 @@ using UnityEngine;
 public class ShelfManager : MonoBehaviour
 {
     [Header("Shelf Positions")]
-    public List<GameObject> shelfSpots;
-    public float delayBeforeNextSpot = 3f;
+    private List<GameObject> _shelfSpots;
+    private float _delayBeforeNextSpot = 3f;
     private GameObject _activeSpot;
     private bool _isWaitingForNextSpot = false;
+    private List<GameObject> _typeOfBoxes;
 
     private IEnumerator ActivateNextPointAfterDelay()
     {
         _isWaitingForNextSpot = true;
-        yield return new WaitForSeconds(delayBeforeNextSpot);
+        yield return new WaitForSeconds(_delayBeforeNextSpot);
         _isWaitingForNextSpot = false;
         ActivateNextSpot();
     }
 
     private void ActivateNextSpot()
     {
-        if (shelfSpots == null || shelfSpots.Count == 0) return;
+        if (_shelfSpots == null || _shelfSpots.Count == 0) return;
 
         GameObject nextPoint = _activeSpot;
 
-        if (shelfSpots.Count > 1)
+        if (_shelfSpots.Count > 1)
         {
             int safetyCounter = 0;
             while (nextPoint == _activeSpot && safetyCounter < 50)
             {
-                int randomIndex = Random.Range(0, shelfSpots.Count);
-                nextPoint = shelfSpots[randomIndex];
+                int randomIndex = Random.Range(0, _shelfSpots.Count);
+                nextPoint = _shelfSpots[randomIndex];
                 safetyCounter++;
             }
         }
         else
         {
-            nextPoint = shelfSpots[0];
+            nextPoint = _shelfSpots[0];
         }
         _activeSpot = nextPoint;
         if (_activeSpot != null)
@@ -47,7 +48,7 @@ public class ShelfManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach (GameObject point in shelfSpots)
+        foreach (GameObject point in _shelfSpots)
         {
             if (point != null)
             {
@@ -59,6 +60,11 @@ public class ShelfManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+            
     }
 }
