@@ -17,6 +17,8 @@ public class MissionManager : MonoBehaviour
     private GameObject _activePoint;
     private bool _isWaitingForNextPoint = false;
 
+    public Transform ActiveTarget => (!_isWaitingForNextPoint && _activePoint != null) ? _activePoint.transform : null;
+
     void Start()
     {
         foreach (GameObject point in missionPoints)
