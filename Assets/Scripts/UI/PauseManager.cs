@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauzeManager : MonoBehaviour
+public class PauseManager : MonoBehaviour
 {
     [Header("UI Panels")]
     public GameObject menuUI;
