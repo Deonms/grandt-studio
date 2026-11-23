@@ -268,11 +268,72 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimerCanvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4809977639217862737, guid: 6710f0109ff6fc44f8d0e022eb04f84e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2792850587342644270, guid: 6710f0109ff6fc44f8d0e022eb04f84e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1898520505}
   m_SourcePrefab: {fileID: 100100000, guid: 6710f0109ff6fc44f8d0e022eb04f84e, type: 3}
+--- !u!114 &1579399415 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6921163491688940120, guid: 3cdec5a7709e1904e8b44c3db50f4264, type: 3}
+  m_PrefabInstance: {fileID: 3973858413707662240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82eb024334268584082b4689c19f742c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1898520503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2792850587342644270, guid: 6710f0109ff6fc44f8d0e022eb04f84e, type: 3}
+  m_PrefabInstance: {fileID: 1477593723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1898520505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898520503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f837920810be0e240bbe1becb588546d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 75
+  _startOnSceneStart: 1
+  _text: {fileID: 1898520506}
+  _onTimeUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1579399415}
+        m_TargetAssemblyTypeName: GameScreenManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1898520506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7917286013349167643, guid: 6710f0109ff6fc44f8d0e022eb04f84e, type: 3}
+  m_PrefabInstance: {fileID: 1477593723}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898520503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3973858413707662240
 PrefabInstance:
   m_ObjectHideFlags: 0
