@@ -1,22 +1,40 @@
-
 using UnityEngine;
 
 public class CanvasTimer : MonoBehaviour
 {
+    public PauzeManager screenManager;
+    public float duration = 20f;
+
+    private float timer;
+    private bool finished = false;
+
     void Start()
     {
-        Invoke(nameof(DisableCanvas), 20f);
+        timer = duration;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (finished) return;
+
+        timer -= Time.deltaTime;
+
+        if (timer <= 0f || Input.GetKeyDown(KeyCode.Q))
         {
-            DisableCanvas();
+            FinishIntro();
         }
     }
-    void DisableCanvas()
+
+    public void FinishIntro()
     {
+        if (finished) return;
+        finished = true;
+
+        if (screenManager != null)
+        {
+            screenManager.OnIntroFinished();
+        }
+
         gameObject.SetActive(false);
     }
 }
