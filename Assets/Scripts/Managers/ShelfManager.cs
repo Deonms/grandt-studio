@@ -15,10 +15,10 @@ public class ShelfManager : MonoBehaviour
         _isWaitingForNextSpot = true;
         yield return new WaitForSeconds(delayBeforeNextSpot);
         _isWaitingForNextSpot = false;
-        ActivateNextPoint();
+        ActivateNextSpot();
     }
 
-    private void ActivateNextPoint()
+    private void ActivateNextSpot()
     {
         if (shelfSpots == null || shelfSpots.Count == 0) return;
 
@@ -47,7 +47,13 @@ public class ShelfManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        foreach (GameObject point in shelfSpots)
+        {
+            if (point != null)
+            {
+                point.SetActive(false);
+            }
+        }
     }
 
     // Update is called once per frame
