@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CanvasTimer : MonoBehaviour
 {
-    public PauzeManager screenManager;
+    public PauseManager screenManager;
     public float duration = 20f;
 
     private float timer;
