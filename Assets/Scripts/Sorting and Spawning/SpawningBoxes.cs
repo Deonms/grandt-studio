@@ -6,6 +6,7 @@ public class SpawningBoxes : MonoBehaviour
     [SerializeField] private List<GameObject> _boxPrefeb = new List<GameObject>();
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private int _maxSpawning = 10; //to reduce lag can be changed during release and testing
+    [SerializeField] private int _timer = 0;
 
     private List<GameObject> _spawnedboxes = new List<GameObject>();
 
@@ -20,10 +21,13 @@ public class SpawningBoxes : MonoBehaviour
     {
         _spawnedboxes.RemoveAll(package => package == null);
 
-        if (_spawnedboxes.Count < _maxSpawning)  //checker for the amount of packages if its not above the maximum or equal to it so no lag can exist
+        if (_spawnedboxes.Count < _maxSpawning && _timer >= 300)  //checker for the amount of packages if its not above the maximum or equal to it so no lag can exist and if timer = a set time
         {
+
+            _timer = 0;
             SpawnPackages(); //this summons the packages
         }
+        _timer = _timer + 1;
     }
 
     private void SpawnPackages()
@@ -34,13 +38,16 @@ public class SpawningBoxes : MonoBehaviour
             return;
         }
 
-        int randomIndex = Random.Range(0, _boxPrefeb.Count);
-        GameObject prefabToSpawn = _boxPrefeb[randomIndex];
+        
 
-        Vector3 spawnPosition = _spawnPoint != null ? _spawnPoint.position : transform.position;
-        GameObject newPackage = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+            int randomIndex = Random.Range(0, _boxPrefeb.Count);
+            GameObject prefabToSpawn = _boxPrefeb[randomIndex];
 
-        _spawnedboxes.Add(newPackage);
+            Vector3 spawnPosition = _spawnPoint != null ? _spawnPoint.position : transform.position;
+            GameObject newPackage = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+            _spawnedboxes.Add(newPackage);
+
+        
     }
 
-}
+    }
