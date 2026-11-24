@@ -5,11 +5,12 @@ using UnityEngine;
 public class ShelfManager : MonoBehaviour
 {
     [Header("Shelf Positions")]
-    private List<GameObject> _shelfSpots;
+    [SerializeField] private List<GameObject> _shelfSpots;
+    [SerializeField] private List<GameObject> _typeOfBoxes;
+
     private float _delayBeforeNextSpot = 3f;
     private GameObject _activeSpot;
     private bool _isWaitingForNextSpot = false;
-    private List<GameObject> _typeOfBoxes;
 
     private IEnumerator ActivateNextPointAfterDelay()
     {
@@ -21,33 +22,32 @@ public class ShelfManager : MonoBehaviour
 
     private void ActivateNextSpot()
     {
-        if (_shelfSpots == null || _shelfSpots.Count == 0) return;
+        if (_shelfSpots == null || _shelfSpots.Count == 0)
+            return;
 
-        GameObject nextPoint = _activeSpot;
+        List<GameObject> emptySpots = new List<GameObject>();
 
-        if (_shelfSpots.Count > 1)
+        foreach (GameObject point in _shelfSpots)
         {
-            int safetyCounter = 0;
-            while (nextPoint == _activeSpot && safetyCounter < 50)
+            if (point != null && point.transform.childCount == 0)
             {
-                int randomIndex = Random.Range(0, _shelfSpots.Count);
-                nextPoint = _shelfSpots[randomIndex];
-                safetyCounter++;
+                emptySpots.Add(point);
             }
         }
-        else
-        {
-            nextPoint = _shelfSpots[0];
-        }
-        _activeSpot = nextPoint;
-        if (_activeSpot != null)
-        {
-            _activeSpot.SetActive(true);
-        }
+
+        if (emptySpots.Count == 0)
+            return;
+
+        int randomIndex = Random.Range(0, emptySpots.Count);
+        _activeSpot = emptySpots[randomIndex];
+        _activeSpot.SetActive(true);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Start()
     {
+        if (_shelfSpots == null)
+            return;
+
         foreach (GameObject point in _shelfSpots)
         {
             if (point != null)
@@ -55,16 +55,59 @@ public class ShelfManager : MonoBehaviour
                 point.SetActive(false);
             }
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+        ActivateNextSpot();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-            
+        GameObject box = collision.gameObject;
+
+        if (box.CompareTag("Fragile") || box.CompareTag("heavy") || box.CompareTag("light") || box.CompareTag("liquid") || box.CompareTag("normal"))
+        {
+            if (_activeSpot != null && _activeSpot.transform.childCount == 0)
+            {
+                // Save the box size before moving it
+                Vector3 boxSize = box.transform.lossyScale;
+
+                // Move the box to the spot
+                box.transform.SetParent(_activeSpot.transform);
+                box.transform.position = _activeSpot.transform.position;
+                box.transform.rotation = _activeSpot.transform.rotation;
+
+                // Keep the same size after parenting
+                Vector3 parentScale = _activeSpot.transform.lossyScale;
+                box.transform.localScale = new Vector3(
+                    boxSize.x / parentScale.x,
+                    boxSize.y / parentScale.y,
+                    boxSize.z / parentScale.z
+                );
+
+                _activeSpot = null;
+
+                if (!_isWaitingForNextSpot)
+                {
+                    StartCoroutine(ActivateNextPointAfterDelay());
+                }
+            }
+        }
+    }
+
+    public void RemoveBoxFromSpot(GameObject spot)
+    {
+        if (spot != null)
+        {
+            if (spot.transform.childCount > 0)
+            {
+                spot.transform.GetChild(0).SetParent(null);
+            }
+
+            spot.SetActive(false);
+
+            if (!_isWaitingForNextSpot)
+            {
+                StartCoroutine(ActivateNextPointAfterDelay());
+            }
+        }
     }
 }
