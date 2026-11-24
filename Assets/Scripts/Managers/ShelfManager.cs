@@ -12,10 +12,16 @@ public class ShelfManager : MonoBehaviour
     private GameObject _activeSpot;
     private bool _isWaitingForNextSpot = false;
 
+    //spots to store the boxes
+    private Dictionary<GameObject, GameObject> _boxSpots =
+        new Dictionary<GameObject, GameObject>();
+
     private IEnumerator ActivateNextPointAfterDelay()
     {
         _isWaitingForNextSpot = true;
+
         yield return new WaitForSeconds(_delayBeforeNextSpot);
+
         _isWaitingForNextSpot = false;
         ActivateNextSpot();
     }
@@ -29,18 +35,34 @@ public class ShelfManager : MonoBehaviour
 
         foreach (GameObject point in _shelfSpots)
         {
-            if (point != null && point.transform.childCount == 0)
+            if (point != null && !IsSpotOccupied(point))
             {
                 emptySpots.Add(point);
             }
         }
 
         if (emptySpots.Count == 0)
+        {
+            _activeSpot = null;
             return;
+        }
 
         int randomIndex = Random.Range(0, emptySpots.Count);
         _activeSpot = emptySpots[randomIndex];
-        _activeSpot.SetActive(true);
+
+        
+        _activeSpot.SetActive(false);
+    }
+
+    private bool IsSpotOccupied(GameObject spot)
+    {
+        foreach (GameObject box in _boxSpots.Keys)
+        {
+            if (box != null && _boxSpots[box] == spot)
+                return true;
+        }
+
+        return false;
     }
 
     private void Start()
@@ -51,63 +73,74 @@ public class ShelfManager : MonoBehaviour
         foreach (GameObject point in _shelfSpots)
         {
             if (point != null)
-            {
                 point.SetActive(false);
-            }
         }
 
         ActivateNextSpot();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) //this makes sure the child of the manager also works on the collission trigger
     {
-        GameObject box = collision.gameObject;
-
-        if (box.CompareTag("Fragile") || box.CompareTag("heavy") || box.CompareTag("light") || box.CompareTag("liquid") || box.CompareTag("normal"))
-        {
-            if (_activeSpot != null && _activeSpot.transform.childCount == 0)
-            {
-                // Save the box size before moving it
-                Vector3 boxSize = box.transform.lossyScale;
-
-                // Move the box to the spot
-                box.transform.SetParent(_activeSpot.transform);
-                box.transform.position = _activeSpot.transform.position;
-                box.transform.rotation = _activeSpot.transform.rotation;
-
-                // Keep the same size after parenting
-                Vector3 parentScale = _activeSpot.transform.lossyScale;
-                box.transform.localScale = new Vector3(
-                    boxSize.x / parentScale.x,
-                    boxSize.y / parentScale.y,
-                    boxSize.z / parentScale.z
-                );
-
-                _activeSpot = null;
-
-                if (!_isWaitingForNextSpot)
-                {
-                    StartCoroutine(ActivateNextPointAfterDelay());
-                }
-            }
-        }
+        TryMoveBoxToSpot(collision.gameObject);
     }
 
-    public void RemoveBoxFromSpot(GameObject spot)
+    private void OnTransformChildrenChanged()
     {
-        if (spot != null)
+        //checks for children
+    }
+
+    private void TryMoveBoxToSpot(GameObject box)
+    {
+        if (box == null || _activeSpot == null)
+            return;
+
+        if (_activeSpot == box || IsSpotOccupied(_activeSpot)) //makes sure the box doesnt change size
+            return;
+
+        if (!IsBox(box))
+            return;
+
+
+        Vector3 boxSize = box.transform.lossyScale;
+
+        //to moce the boxes to the spots set
+        box.transform.SetParent(null);
+        box.transform.position = _activeSpot.transform.position;
+        box.transform.rotation = _activeSpot.transform.rotation;
+        box.transform.localScale = boxSize;
+    
+       
+        _boxSpots[box] = _activeSpot; //checks for empty spots
+
+        _activeSpot = null;
+
+        if (!_isWaitingForNextSpot)
+            StartCoroutine(ActivateNextPointAfterDelay());
+    }
+
+    private bool IsBox(GameObject box)
+    {
+        if (box.CompareTag("Fragile") ||
+            box.CompareTag("heavy") ||
+            box.CompareTag("light") ||
+            box.CompareTag("liquid") ||
+            box.CompareTag("normal"))
         {
-            if (spot.transform.childCount > 0)
-            {
-                spot.transform.GetChild(0).SetParent(null);
-            }
-
-            spot.SetActive(false);
-
-            if (!_isWaitingForNextSpot)
-            {
-                StartCoroutine(ActivateNextPointAfterDelay());
-            }
+            return true;
         }
+
+        return false;
+    }
+
+    public void RemoveBoxFromSpot(GameObject box)
+    {
+        if (box == null)
+            return;
+
+        if (_boxSpots.ContainsKey(box))
+            _boxSpots.Remove(box);
+
+        if (!_isWaitingForNextSpot)
+            StartCoroutine(ActivateNextPointAfterDelay());
     }
 }
