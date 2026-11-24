@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class CarController : MonoBehaviour
+public class CarMovement : MonoBehaviour
 {
     public float acceleration = 25f;
     public float maxSpeed = 18f;
