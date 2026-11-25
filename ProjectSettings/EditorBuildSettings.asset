@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/DeliveryScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/NathanTestScenes/SceneHandlerTest/SceneHandlerTestFirstScene.unity
-    guid: 0f90fcc87d57cd04e8291d4759baa958
-  - enabled: 1
-    path: Assets/Scenes/NathanTestScenes/SceneHandlerTest/SceneHandlerTestSecondScene.unity
-    guid: eb971152dfb5dae4a9f0affc0bac7997
+    path: Assets/Scenes/NathanTestScenes/SceneHandlerTest/SceneTestStartMenu.unity
+    guid: 017c9dea2987ea5428538e17ef27f6ea
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
